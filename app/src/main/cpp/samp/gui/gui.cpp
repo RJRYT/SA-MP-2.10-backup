@@ -96,10 +96,19 @@ bool UI::initialize()
 
     // mem
     Label* d_label1;
+    if(VER_x32)
+    {
+        d_label1 = new Label(cryptor::create("Client TGRP | armeabi-v7a (x32)").decrypt(), ImColor(1.0f, 1.0f, 1.0f), true, UISettings::fontSize() / 3);
+        this->addChild(d_label1);
+        d_label1->setPosition(ImVec2(3.0, 3.0));
+    }
+    else
+    {
+        d_label1 = new Label(cryptor::create("Client TGRP | arm64-v8a (x64)").decrypt(), ImColor(1.0f, 1.0f, 1.0f), true, UISettings::fontSize() / 3);
+        this->addChild(d_label1);
+        d_label1->setPosition(ImVec2(3.0, 3.0));
+    }
 
-    d_label1 = new Label(cryptor::create("SA:MP Mobile 2.10").decrypt(), ImColor(1.0f, 1.0f, 1.0f), true, UISettings::fontSize() / 3);
-    this->addChild(d_label1);
-    d_label1->setPosition(ImVec2(3.0, 3.0));
 
     //InitHudLogo();
     // ==== version ==== //
@@ -152,10 +161,10 @@ void UI::touchEvent(const ImVec2& pos, TouchType type)
 {
     if(!visible()) return;
     /*
-        � ������� ����������
-        1 - ����������
-        2 - ������
-        3 - ���
+        ? ??????? ??????????
+        1 - ??????????
+        2 - ??????
+        3 - ???
     */
 
     if (m_keyboard->visible() && m_keyboard->contains(pos))
@@ -308,20 +317,18 @@ void UI::ProcessPushedTextdraws()
 
 #include "..//game/sprite2d.h"
 void UI::DrawServerTexture() {
-    // получаем размеры экрана
     ImGuiIO& io = ImGui::GetIO();
     float displayWidth = io.DisplaySize.x;
     float displayHeight = io.DisplaySize.y;
 
-    // устанавливаем координаты для нижнего левого угла
-    float textureWidth = 175.0f; // ширина текстуры
-    float textureHeight = 120.0f; // высота текстуры
-    float x = 10.0f; // отступ от левого края
-    float y = displayHeight - textureHeight - 2.0f; // отступ от нижнего края
+    float textureWidth = 175.0f;
+    float textureHeight = 120.0f;
+    float x = 10.0f;
+    float y = displayHeight - textureHeight - 2.0f;
 
-    // загружаем и рисуем текстуру
+
     CSprite2d* server = new CSprite2d();
-    server->m_pRwTexture = (RwTexture*)CUtil::LoadTextureFromDB("samp", "kuzia"); // в samp с названием dslogo
+    server->m_pRwTexture = (RwTexture*)CUtil::LoadTextureFromDB("samp", "serverlogo");
 
     CRGBA color {255, 255, 255, 255};
 

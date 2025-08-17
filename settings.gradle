@@ -5,5 +5,5 @@ pluginManagement {
         mavenCentral()
     }
 }
-rootProject.name = "SA-MP Launcher"
+rootProject.name = "SAMP-2.10"
 include ':app'

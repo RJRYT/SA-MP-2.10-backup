@@ -3,20 +3,17 @@ package com.samp.mobile.game;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
 
-import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.joom.paranoid.Obfuscate;
 import com.samp.mobile.game.ui.AttachEdit;
 import com.samp.mobile.game.ui.CustomKeyboard;
 import com.samp.mobile.game.ui.LoadingScreen;
 import com.samp.mobile.game.ui.dialog.DialogManager;
-import com.samp.mobile.launcher.util.SharedPreferenceCore;
-import com.samp.mobile.launcher.util.SignatureChecker;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+
+
 @Obfuscate
 public class SAMP extends GTASA implements CustomKeyboard.InputListener, HeightProvider.HeightListener {
     private static final String TAG = "SAMP";
@@ -70,6 +67,8 @@ public class SAMP extends GTASA implements CustomKeyboard.InputListener, HeightP
         });
     }
 
+
+
     public void setPauseState(boolean pause) {
         runOnUiThread(new Runnable() {
             @Override
@@ -89,8 +88,6 @@ public class SAMP extends GTASA implements CustomKeyboard.InputListener, HeightP
     }
 
     public void exitGame(){
-        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(false);
-
         finishAndRemoveTask();
         System.exit(0);
     }
@@ -145,7 +142,6 @@ public class SAMP extends GTASA implements CustomKeyboard.InputListener, HeightP
             }
         });
     }
-
     private void showEditObject()
     {
         runOnUiThread(new Runnable() {
@@ -171,12 +167,6 @@ public class SAMP extends GTASA implements CustomKeyboard.InputListener, HeightP
         Log.i(TAG, "**** onCreate");
         super.onCreate(savedInstanceState);
 
-        //if(!SignatureChecker.isSignatureValid(this, getPackageName()))
-        //{
-            //Toast.makeText(this, "Use original launcher! No remake", Toast.LENGTH_LONG).show();
-            //return;
-        //}
-
         //mHeightProvider = new HeightProvider(this);
 
         mKeyboard = new CustomKeyboard(this);
@@ -186,6 +176,7 @@ public class SAMP extends GTASA implements CustomKeyboard.InputListener, HeightP
         mAttachEdit = new AttachEdit(this);
 
         mLoadingScreen = new LoadingScreen(this);
+
 
         instance = this;
 
